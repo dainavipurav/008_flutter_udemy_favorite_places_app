@@ -26,9 +26,20 @@ class AddNewPlace extends ConsumerWidget {
             Form(
               key: formKey,
               child: TextFormField(
-                decoration: const InputDecoration(
-                  label: Text('Title'),
+                decoration: InputDecoration(
+                  label: Text(
+                    'Title',
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
+                  ),
+                  labelStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
                 ),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter place name';
@@ -47,10 +58,12 @@ class AddNewPlace extends ConsumerWidget {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
                   PlaceModel model = PlaceModel(
-                      id: Random(1000).toString(), name: textController.text);
+                    id: Random().nextInt(1000).toString(),
+                    name: textController.text,
+                  );
                   wref.add(model);
 
-                  print(wref.length);
+                  print('${model.id} : ${model.name}');
 
                   Navigator.pop(context);
                 }

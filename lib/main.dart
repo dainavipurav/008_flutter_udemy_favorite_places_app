@@ -29,9 +29,20 @@ final theme = ThemeData().copyWith(
 void main() {
   runApp(
     const ProviderScope(
-      child: MaterialApp(
-        home: Home(),
-      ),
+      child: App(),
     ),
   );
+}
+
+class App extends StatelessWidget {
+  const App({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Great Places',
+      theme: theme,
+      home: const Home(),
+    );
+  }
 }
