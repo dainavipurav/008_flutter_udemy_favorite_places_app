@@ -22,15 +22,25 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   void _savePlace() {
     if (formKey.currentState!.validate()) {
       if (selectedImage == null) {
+        ScaffoldMessenger.of(context).clearSnackBars();
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Please add place image'),
+          SnackBar(
+            content: Text(
+              'Please add place image',
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+            ),
+            backgroundColor: Theme.of(context).colorScheme.surface,
           ),
         );
         return;
       }
       formKey.currentState!.save();
-      ref.read(userPlacesProvider.notifier).addPlace(_textController.text);
+      ref.read(userPlacesProvider.notifier).addPlace(
+            _textController.text,
+            selectedImage!,
+          );
       Navigator.pop(context);
     }
   }
