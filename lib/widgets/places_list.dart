@@ -33,7 +33,7 @@ class PlacesList extends StatelessWidget {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (ctx) => PlaceDetailScreen(title: places[index].title),
+                builder: (ctx) => PlaceDetailScreen(place: places[index]),
               ),
             );
           },
