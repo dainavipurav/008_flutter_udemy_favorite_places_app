@@ -1,12 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:udemy_007_favorite_places_app/models/place.dart';
 import 'package:udemy_007_favorite_places_app/providers/places_provider.dart';
 
-class AddNewPlace extends ConsumerWidget {
-  const AddNewPlace({super.key});
+class AddPlaceScreen extends ConsumerWidget {
+  const AddPlaceScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
