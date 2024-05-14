@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_007_favorite_places_app/screens/place_detail.dart';
 
 import '../models/place.dart';
 
@@ -20,7 +21,6 @@ class PlacesList extends StatelessWidget {
     }
 
     return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       itemCount: places.length,
       itemBuilder: (context, index) {
         return ListTile(
@@ -30,6 +30,13 @@ class PlacesList extends StatelessWidget {
                   color: Theme.of(context).colorScheme.onBackground,
                 ),
           ),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (ctx) => PlaceDetailScreen(title: places[index].title),
+              ),
+            );
+          },
         );
       },
     );
