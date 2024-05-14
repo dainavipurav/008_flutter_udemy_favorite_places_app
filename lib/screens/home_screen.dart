@@ -38,7 +38,7 @@ class _HomeState extends ConsumerState<Home> {
         itemBuilder: (context, index) {
           final currentItem = wRef[index];
           return Text(
-            '${currentItem.id} : ${currentItem.name}',
+            '${currentItem.id} : ${currentItem.title}',
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                   color: Theme.of(context).colorScheme.onBackground,
                 ),

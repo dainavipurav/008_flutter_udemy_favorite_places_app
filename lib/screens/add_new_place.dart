@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:udemy_007_favorite_places_app/models/place_model.dart';
+import 'package:udemy_007_favorite_places_app/models/place.dart';
 import 'package:udemy_007_favorite_places_app/providers/places_provider.dart';
 
 class AddNewPlace extends ConsumerWidget {
@@ -57,13 +57,12 @@ class AddNewPlace extends ConsumerWidget {
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
-                  PlaceModel model = PlaceModel(
-                    id: Random().nextInt(1000).toString(),
-                    name: textController.text,
+                  Place model = Place(
+                    title: textController.text,
                   );
                   wref.add(model);
 
-                  print('${model.id} : ${model.name}');
+                  print('${model.id} : ${model.title}');
 
                   Navigator.pop(context);
                 }
