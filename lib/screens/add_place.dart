@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:udemy_007_favorite_places_app/providers/user_places_provider.dart';
+import 'package:udemy_007_favorite_places_app/widgets/image_input.dart';
 
 class AddPlaceScreen extends ConsumerStatefulWidget {
   const AddPlaceScreen({super.key});
@@ -49,14 +50,20 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
           children: [
             Form(
               key: formKey,
-              child: TextFormField(
-                decoration: const InputDecoration(label: Text('Title')),
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onBackground,
-                ),
-                validator: _titleValidator,
-                keyboardType: TextInputType.text,
-                controller: _textController,
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: const InputDecoration(label: Text('Title')),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+                    validator: _titleValidator,
+                    keyboardType: TextInputType.text,
+                    controller: _textController,
+                  ),
+                  const SizedBox(height: 16),
+                  const ImageInput(),
+                ],
               ),
             ),
             const SizedBox(height: 20),
