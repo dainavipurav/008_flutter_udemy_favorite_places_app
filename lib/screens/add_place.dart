@@ -1,17 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:udemy_007_favorite_places_app/providers/user_places_provider.dart';
 
-class AddPlaceScreen extends StatefulWidget {
+class AddPlaceScreen extends ConsumerStatefulWidget {
   const AddPlaceScreen({super.key});
 
   @override
-  State<AddPlaceScreen> createState() {
+  ConsumerState<AddPlaceScreen> createState() {
     return _AddPlaceScreenState();
   }
 }
 
-class _AddPlaceScreenState extends State<AddPlaceScreen> {
+class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   final _textController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  void _savePlace() {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+      ref.read(userPlacesProvider.notifier).addPlace(_textController.text);
+      Navigator.pop(context);
+    }
+  }
+
+  String? _titleValidator(value) {
+    if (value == null || value.isEmpty || value.toString().trim().isEmpty) {
+      return 'Please enter place name';
+    }
+    return null;
+  }
+
   @override
   void dispose() {
     _textController.dispose();
@@ -36,12 +54,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.onBackground,
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter place name';
-                  }
-                  return null;
-                },
+                validator: _titleValidator,
                 keyboardType: TextInputType.text,
                 controller: _textController,
               ),
@@ -49,13 +62,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
             const SizedBox(height: 20),
             ElevatedButton.icon(
               icon: const Icon(Icons.add),
-              onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  formKey.currentState!.save();
-
-                  Navigator.pop(context);
-                }
-              },
+              onPressed: _savePlace,
               label: const Text('Add Place'),
             ),
           ],

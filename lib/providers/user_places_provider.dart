@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:udemy_007_favorite_places_app/models/place.dart';
 
-class PlaceNotifier extends StateNotifier<List<Place>> {
-  PlaceNotifier() : super([]);
+class UserPlacesNotifier extends StateNotifier<List<Place>> {
+  UserPlacesNotifier() : super([]);
 
   void addPlace(String title) {
     final newPlace = Place(title: title);
@@ -14,6 +14,7 @@ class PlaceNotifier extends StateNotifier<List<Place>> {
   }
 }
 
-final placesProvider = StateNotifierProvider<PlaceNotifier, List<Place>>((ref) {
-  return PlaceNotifier();
+final userPlacesProvider =
+    StateNotifierProvider<UserPlacesNotifier, List<Place>>((ref) {
+  return UserPlacesNotifier();
 });
