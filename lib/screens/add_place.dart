@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:udemy_007_favorite_places_app/providers/user_places_provider.dart';
@@ -15,9 +17,18 @@ class AddPlaceScreen extends ConsumerStatefulWidget {
 class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   final _textController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  File? selectedImage;
 
   void _savePlace() {
     if (formKey.currentState!.validate()) {
+      if (selectedImage == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please add place image'),
+          ),
+        );
+        return;
+      }
       formKey.currentState!.save();
       ref.read(userPlacesProvider.notifier).addPlace(_textController.text);
       Navigator.pop(context);
@@ -62,7 +73,11 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
                     controller: _textController,
                   ),
                   const SizedBox(height: 16),
-                  const ImageInput(),
+                  ImageInput(
+                    onSelectImage: (image) {
+                      selectedImage = image;
+                    },
+                  ),
                 ],
               ),
             ),
